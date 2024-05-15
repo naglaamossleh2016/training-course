@@ -902,7 +902,8 @@
     </style>
     @livewireStyles
 </head>
-@livewire('upload-file')
+{{-- @livewire('upload-file') --}}
+@livewire('poll-component')
 
 
 <body>
