@@ -11,16 +11,22 @@ class UploadFile extends Component
     use WithFileUploads;
     
     public $photo;
+    public $disk = 'local';
     public function rules(){
        return ['photo'=>'image'];
     }
     public function submit(){
         $this->validate();
-        $this->photo->storeAs('photos','hello.jpg');
+        $this->photo->storeAs(path:'local',name:'hello.jpg');
     }
     public function download()
     {
-        return Storage::disk('local.photos')->download('hello.jpg');
+        if (Storage::disk('local')->exists('hello.jpg')) {
+        return Storage::disk('local')->download('hello.jpg');
+        }
+        else{
+            dd("not exist");
+        }
     }
     public function render()
     {
